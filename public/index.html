@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Cloud Computing Ex1</title>
+</head>
+<body>
+<h1>Cloud Computing Ex2</h1>
+<button id="btnSearch" type="button">Search</button>
+<ul id="calc"></ul>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+    $("#btnSearch").click(function(event) {
+        console.log("btn click!!");
+        $.ajax({
+            url: "/keyword",
+            data: {"word": "reviews"},
+            success: function(data) {
+                console.log(data);
+            },
+            error: function(err) {
+                console.log("Error");
+            }
+        });
+    });
+</script>
+<!--<script>
+    $("#btnAWSStatus").click(function(event) {
+        console.log("btnAWSStatus click!!");
+        $.get( "/aws/status", function(data) {
+            $( "#awsStatus").empty();
+            if (data) {
+                var ec2Instances = data["ec2Instances"];
+                for (var i = 0; i < ec2Instances.length; i++) {
+                    var instance = ec2Instances[i];
+                    $("#awsStatus").append("<li>" + "EC2 - " +
+                    " Name: " + instance["name"] + "." +
+                    " Type: " + instance["type"] + "." +
+                    " Availability Zone: " + instance["availabilityZone"] + "." +
+                    " State: " + instance["state"] + "." +
+                    "</li>");
+                }
+
+                var elbs = data["elbs"];
+                for (var i = 0; i < elbs.length; i++) {
+                    var loadBalancer = elbs[i];
+                    $("#awsStatus").append("<li>" + "ELB - " +
+                    " Name: " + loadBalancer["name"] + "." +
+                    " DNS Name: " + loadBalancer["dnsName"] + "." +
+                    " Availability Zones: " + loadBalancer["availabilityZones"] + "." +
+                    " Created Time: " + loadBalancer["createdTime"] + "." +
+                    " Scheme: " + loadBalancer["scheme"] + "." +
+                    " Instances: " + loadBalancer["instances"] + "." +
+                    "</li>");
+                }
+            } else {
+                $("#awsStatus").text("No instances have been configured!");
+            }
+        });
+    });
+</script>
+<script>
+    $("#btnClearCache").click(function(event) {
+        console.log("btnClearCache click!!");
+        $.get( "/grades/cache/clear", function( data ) {
+            $( "#showCache").empty();
+            $( "#clearCache").empty();
+            if (data != null && data == "OK") {
+                $("#clearCache").text("The cache was cleared successfully!!!");
+            } else {
+                $("#clearCache").text("The cache clear operation has failed.");
+            }
+        });
+    });
+</script>
+<script>
+    $("#btnShowCache").click(function(event) {
+        console.log("btnShowCache click!!");
+        $.get( "/grades/cache", function( data ) {
+            parseAndAddGrades(data, "#showCache");
+        });
+    });
+</script>
+<script type="text/javascript">
+    function parseAndAddGrades(data, element) {
+        $(element).empty();
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                var fileGrade = JSON.parse(data[i]);
+                $(element).append("<li>" + "For File " + fileGrade["fileName"] + " the average grade is " + fileGrade["avgGrade"] + "</li>");
+            }
+        } else {
+            $(element).text("No results from cache!");
+        }
+    }
+</script>-->
+</body>
+</html>
