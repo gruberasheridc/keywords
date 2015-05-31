@@ -1,9 +1,13 @@
-var s3 = require('../AWSService')();
-s3.setup();
+var db = require('../AWSService')();
+db.setup();
 
 exports.search = function (req, res) {
     var searchKey = req.query.searchTerm;
-    s3.getItem(searchKey).then(function(data) {
+    db.getItem(searchKey).then(function(data) {
+        db.batchGetItem(["reviews", "search"]).then(function(data) {
+
+        });
+
         res.send(data);
     });
 };

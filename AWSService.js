@@ -124,6 +124,33 @@ module.exports = function () {
         });
     }
 
+    function batchGetItem(keys) {
+        return new Promise(function(resolve, reject) {
+            var params = {
+                RequestItems : {
+                    "InvertedIndex" : {
+                        Keys : [
+                            {"Word" : { "S" : keys[0] } },
+                            {"Word" : { "S" : keys[1] } }
+                        ]
+                    }
+                }
+            }
+
+            var db = new AWS.DynamoDB();
+            db.batchGetItem(params, function(err, data) {
+                if (err) {
+                    // an error occurred
+                    reject(error);
+                }
+                else {
+                    // successful response
+                    resolve(data);
+                }
+            });
+        });
+    }
+
     return {
         setup : setup,
         getFile : getFile,
@@ -131,7 +158,8 @@ module.exports = function () {
         uploadFile : uploadFile,
         getEC2InstanceData : getEC2InstanceData,
         getELBInstanceData : getELBInstanceData,
-        getItem : getItem
+        getItem : getItem,
+        batchGetItem : batchGetItem
     };
 
 };
