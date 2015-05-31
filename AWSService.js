@@ -99,13 +99,13 @@ module.exports = function () {
         });
     }
 
-    function getItem() {
+    function getItem(key) {
         return new Promise(function(resolve, reject){
             var params = {
                 TableName: 'InvertedIndex',
                 Key: {
                     "Word" : {
-                        "S" : "reviews"
+                        "S" : key
                     }
                 }
             }
