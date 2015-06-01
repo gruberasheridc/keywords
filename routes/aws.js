@@ -13,6 +13,13 @@ exports.search = function (req, res) {
 exports.query = function (req, res) {
     var searchKey = req.query.searchTerm;
     db.queryItems(searchKey).then(function(data) {
-        res.send(data);
+        // Process data and send response to the caller.
+        var websites = [];
+        data.Items.forEach(function(item) {
+            var website = item.Url.S;
+            websites.push(website);
+        })
+
+        res.send(websites);
     });
 };
