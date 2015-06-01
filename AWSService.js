@@ -67,6 +67,7 @@ module.exports = function () {
             // Define the basic params object.
             var params = {
                 TableName : "WordUrlRank",
+                IndexName : "Word-Rank-index",
                 KeyConditions : {
                     Word : {
                         ComparisonOperator: "EQ",
@@ -74,7 +75,8 @@ module.exports = function () {
                             { S: "reviews" }
                         ]
                     }
-                }
+                },
+                ScanIndexForward : false
             }
 
             var db = new AWS.DynamoDB();
