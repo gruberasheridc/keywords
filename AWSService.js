@@ -62,10 +62,40 @@ module.exports = function () {
         });
     }
 
+    function queryItems(key) {
+        return new Promise(function(resolve, reject) {
+            // Define the basic params object.
+            var params = {
+                TableName : "WordUrlRank",
+                KeyConditions : {
+                    Word : {
+                        ComparisonOperator: "EQ",
+                        AttributeValueList: [
+                            { S: "reviews" }
+                        ]
+                    }
+                }
+            }
+
+            var db = new AWS.DynamoDB();
+            db.query(params, function(err, data) {
+                if (err) {
+                    // an error occurred
+                    reject(error);
+                }
+                else {
+                    // successful response
+                    resolve(data);
+                }
+            });
+        });
+    }
+
     return {
         setup : setup,
         getItem : getItem,
-        batchGetItem : batchGetItem
+        batchGetItem : batchGetItem,
+        queryItems : queryItems
     };
 
 };

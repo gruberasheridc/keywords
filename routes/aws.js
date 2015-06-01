@@ -9,3 +9,9 @@ exports.search = function (req, res) {
         });
     });
 };
+
+exports.query = function (req, res) {
+    db.queryItems().then(function(data) {
+        res.send(data);
+    });
+};
