@@ -9,7 +9,8 @@
 <div class="wrapper">
     <input id="txtSearch" type="text" />
     <button id="btnSearch" type="button">Search</button>
-    <ul id="resultSearch"></ul>
+    <h4 id="resultSitesHeader"></h4>
+    <ul id="resultSites"></ul>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
@@ -19,7 +20,7 @@
             url: "/keyword",
             data: {"searchTerm": searchTerm},
             success: function(data) {
-                console.log(data);
+                addSites(data, "#resultSites", "#resultSitesHeader");
             },
             error: function(err) {
                 console.log("Error: " + err + ".");
@@ -27,26 +28,19 @@
         });
     });
 </script>
-<!--script>
-    $("#btnShowCache").click(function(event) {
-        console.log("btnShowCache click!!");
-        $.get( "/grades/cache", function( data ) {
-            parseAndAddGrades(data, "#showCache");
-        });
-    });
 </script>
 <script type="text/javascript">
-    function parseAndAddGrades(data, element) {
+    function addSites(sites, element, header) {
         $(element).empty();
-        if (data.length > 0) {
-            for (var i = 0; i < data.length; i++) {
-                var fileGrade = JSON.parse(data[i]);
-                $(element).append("<li>" + "For File " + fileGrade["fileName"] + " the average grade is " + fileGrade["avgGrade"] + "</li>");
+        if (sites.length > 0) {
+            $(header).text("Websites that contain the keyword sorted by ranking:");
+            for (var i = 0; i < sites.length; i++) {
+                $(element).append("<li>" + sites[i] + "</li>");
             }
         } else {
-            $(element).text("No results from cache!");
+            $(header).text("No websites that contain the keyword were found.");
         }
     }
-</script>-->
+</script>
 </body>
 </html>
