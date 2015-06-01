@@ -11,7 +11,8 @@ exports.search = function (req, res) {
 };
 
 exports.query = function (req, res) {
-    db.queryItems().then(function(data) {
+    var searchKey = req.query.searchTerm;
+    db.queryItems(searchKey).then(function(data) {
         res.send(data);
     });
 };

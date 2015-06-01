@@ -5,8 +5,8 @@ app.use(express.static('public'));
 
 var aws = require('./routes/aws');
 
-app.get('/keyword', aws.search);
-app.get('/query', aws.query);
+//app.get('/keyword', aws.search);
+app.get('/keyword', aws.query);
 
 var server = app.listen(3000, function () {
     var host = server.address().address;

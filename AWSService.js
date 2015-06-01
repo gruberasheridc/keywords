@@ -72,7 +72,7 @@ module.exports = function () {
                     Word : {
                         ComparisonOperator: "EQ",
                         AttributeValueList: [
-                            { S: "reviews" }
+                            { S: key }
                         ]
                     }
                 },
