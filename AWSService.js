@@ -62,6 +62,58 @@ module.exports = function () {
         });
     }
 
+    function batchWriteItem() {
+        return new Promise(function(resolve, reject) {
+            // Define the basic params object.
+            var params = {
+                RequestItems: { /* required */
+                    WordUrlRank: [
+                        {
+                            PutRequest: {
+                                Item: { /* required */
+                                    Word: { /* AttributeValue */
+                                        S: 'home'
+                                    },
+                                    Url: {
+                                        S: 'http://recode.net'
+                                    },
+                                    Rank: {
+                                        N: '12'
+                                    }
+                                }
+                            },
+                            PutRequest: {
+                                Item: { /* required */
+                                    Word: { /* AttributeValue */
+                                        S: 'learn'
+                                    },
+                                    Url: {
+                                        S: 'http://www.nytimes.com'
+                                    },
+                                    Rank: {
+                                        N: '4'
+                                    }
+                                }
+                            }
+                        }
+                    ]
+                }
+            };
+
+            var db = new AWS.DynamoDB();
+            db.batchWriteItem(params, function(err, data) {
+                if (err) {
+                    // an error occurred
+                    reject(error);
+                }
+                else {
+                    // successful response
+                    resolve(data);
+                }
+            });
+        });
+    }
+
     function queryItems(key) {
         return new Promise(function(resolve, reject) {
             // Define the basic params object.
@@ -97,6 +149,7 @@ module.exports = function () {
         setup : setup,
         getItem : getItem,
         batchGetItem : batchGetItem,
+        batchWriteItem : batchWriteItem,
         queryItems : queryItems
     };
 

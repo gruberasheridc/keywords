@@ -11,6 +11,8 @@
   "dependencies": {
     "aws-sdk": "^2.1.21",
     "bluebird": "^2.9.24",
-    "express": "^4.12.3"
+    "collections": "^1.2.3",
+    "express": "^4.12.3",
+    "validator": "^3.40.0"
   }
 }
