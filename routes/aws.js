@@ -114,7 +114,7 @@ exports.fillTable = function (req, res) {
 
             });
 
-            db.batchWriteItem().then(function(data) {
+            db.batchWriteItem(rankItems).then(function(data) {
                 res.send(data);
             });
         }

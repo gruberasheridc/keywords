@@ -62,30 +62,25 @@ module.exports = function () {
         });
     }
 
-    function batchWriteItem() {
+    function batchWriteItem(items) {
         return new Promise(function(resolve, reject) {
             // Define the basic params object.
             var params = {
-                RequestItems: { /* required */
-                    WordUrlRank: [
-                        {
-                            PutRequest: {
-                                Item: { /* required */
-                                    Word: { /* AttributeValue */
-                                        S: 'home'
-                                    },
-                                    Url: {
-                                        S: 'http://recode.net'
-                                    },
-                                    Rank: {
-                                        N: '12'
-                                    }
-                                }
-                            }
-                        }
-                    ]
+                RequestItems: {
+                    WordUrlRank: []
                 }
-            };
+             };
+
+             // Fill the table with put requests.
+/*             items.forEach(function(item) {
+                 params.RequestItems.WordUrlRank.push({
+                     PutRequest : item
+                 });
+             });*/
+
+            params.RequestItems.WordUrlRank.push({
+                PutRequest : items[0]
+            });
 
             var db = new AWS.DynamoDB();
             db.batchWriteItem(params, function(err, data) {
