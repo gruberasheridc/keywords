@@ -37,7 +37,7 @@ exports.query = function (req, res) {
     }
 };
 
-exports.fillTalbe = function (req, res) {
+exports.fillTable = function (req, res) {
     // Read input file.
     fs.getFile("./input/invertedindex.txt").then(function(data) {
         if (data) {
@@ -104,7 +104,7 @@ exports.fillTalbe = function (req, res) {
                                 S: site
                             },
                             Rank: {
-                                N: siteRank
+                                N: siteRank.toString()
                             }
                         }
                     };
@@ -113,10 +113,11 @@ exports.fillTalbe = function (req, res) {
                 });
 
             });
+
+            db.batchWriteItem().then(function(data) {
+                res.send(data);
+            });
         }
-/*        db.batchWriteItem().then(function(data) {
-            res.send(data);
-        });*/
     });
 };
 

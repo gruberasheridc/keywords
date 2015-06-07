@@ -7,7 +7,7 @@ var aws = require('./routes/aws');
 
 //app.get('/keyword', aws.search);
 app.get('/keyword', aws.query);
-app.get('/insert', aws.fillTalbe);
+app.get('/insert', aws.fillTable);
 
 var server = app.listen(3000, function () {
     var host = server.address().address;

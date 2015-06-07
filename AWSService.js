@@ -22,7 +22,7 @@ module.exports = function () {
             db.getItem(params, function(err, data) {
                 if (err) {
                     // an error occurred
-                    reject(error);
+                    reject(err);
                 }
                 else {
                     // successful response
@@ -52,7 +52,7 @@ module.exports = function () {
             db.batchGetItem(params, function(err, data) {
                 if (err) {
                     // an error occurred
-                    reject(error);
+                    reject(err);
                 }
                 else {
                     // successful response
@@ -81,19 +81,6 @@ module.exports = function () {
                                         N: '12'
                                     }
                                 }
-                            },
-                            PutRequest: {
-                                Item: { /* required */
-                                    Word: { /* AttributeValue */
-                                        S: 'learn'
-                                    },
-                                    Url: {
-                                        S: 'http://www.nytimes.com'
-                                    },
-                                    Rank: {
-                                        N: '4'
-                                    }
-                                }
                             }
                         }
                     ]
@@ -104,7 +91,7 @@ module.exports = function () {
             db.batchWriteItem(params, function(err, data) {
                 if (err) {
                     // an error occurred
-                    reject(error);
+                    reject(err);
                 }
                 else {
                     // successful response
@@ -135,7 +122,7 @@ module.exports = function () {
             db.query(params, function(err, data) {
                 if (err) {
                     // an error occurred
-                    reject(error);
+                    reject(err);
                 }
                 else {
                     // successful response
