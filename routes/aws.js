@@ -47,10 +47,12 @@ exports.fillTable = function (req, res) {
             // Generate a word/url => Sites/Number map. To be used in order to prepare the insert statement.
             var wordSitesMap = new Map();
             lines.forEach(function(line) {
-                var wordSites = spliteWordSites(line);
-                var word = wordSites[0];
-                var sites = wordSites[1]; // If the word is a URL sites will contain a number.
-                wordSitesMap.set(word, sites);
+                if (line) {
+                    var wordSites = spliteWordSites(line);
+                    var word = wordSites[0];
+                    var sites = wordSites[1]; // If the word is a URL sites will contain a number.
+                    wordSitesMap.set(word, sites);
+                }
             });
 
             // Generate items for insert to the InvertedIndex Table (item contains Word, Sites).
