@@ -72,15 +72,15 @@ module.exports = function () {
              };
 
              // Fill the table with put requests.
-/*             items.forEach(function(item) {
+             items.forEach(function(item) {
                  params.RequestItems.WordUrlRank.push({
                      PutRequest : item
                  });
-             });*/
+             });
 
-            params.RequestItems.WordUrlRank.push({
+/*            params.RequestItems.WordUrlRank.push({
                 PutRequest : items[0]
-            });
+            });*/
 
             var db = new AWS.DynamoDB();
             db.batchWriteItem(params, function(err, data) {
